@@ -1,19 +1,45 @@
 package com.expense.groupexpensetracker;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
-public class Expense extends ActionBarActivity {
+public class Expense extends Activity {
 
-    @Override
+     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-		
-		
-        setContentView(R.layout.activity_expense);
+         setContentView(R.layout.activity_expense);
+         final EditText userName = (EditText) findViewById(R.id.userNameValue);
+         EditText password = (EditText) findViewById(R.id.passwordValue);
+         Button signInBtn = (Button) findViewById(R.id.signInBtnId);
+         Button signUpBtn = (Button) findViewById(R.id.signUpBtnId);
+
+         signInBtn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Intent homeScreen = new Intent(Expense.this, Home.class);
+                 startActivity(homeScreen);
+
+             }
+         });
+         signUpBtn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Intent homeScreen = new Intent(Expense.this, Registration.class);
+                 startActivity(homeScreen);
+
+             }
+         });
+
     }
 
     @Override
