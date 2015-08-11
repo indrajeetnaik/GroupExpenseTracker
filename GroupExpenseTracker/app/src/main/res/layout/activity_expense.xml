@@ -3,12 +3,16 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-        tools:context=".Expense">
+        tools:context=".Expense"
+    android:paddingLeft="20dp"
+    android:paddingTop="20dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="20dp">
 
    <!-- <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView" />-->
-
+<!--
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -18,7 +22,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/welcomeMsgLayoutId">
+            android:id="@+id/welcomeMsgLayoutId">-->
 
             <TextView
                 android:layout_width="match_parent"
@@ -31,7 +35,7 @@
                 android:paddingRight="20dp"
                 android:paddingBottom="20dp"
                 android:textSize="30sp" />
-        </LinearLayout>
+       <!-- </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -42,9 +46,9 @@
             android:paddingTop="20dp"
             android:paddingRight="20dp"
             android:paddingBottom="20dp"
-            android:gravity="center">
+            android:gravity="center">-->
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,23 +56,11 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
-                android:paddingBottom="10dp">
+                android:paddingBottom="10dp">-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="User Name :"
-                    android:id="@+id/userNameLabel"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
-                    android:textAlignment="center"
-                    android:textSize="20sp" />
-            </LinearLayout>
+    <!-- </LinearLayout>-->
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,24 +68,26 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
-                android:paddingBottom="10dp">
+                android:paddingBottom="10dp">-->
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/userNameValue"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
+                    android:paddingLeft="30dp"
+                    android:paddingTop="30dp"
+                    android:paddingRight="30dp"
+                    android:paddingBottom="30dp"
                     android:textAlignment="center"
-                    android:textSize="20sp" />
+                    android:textSize="25sp"
+                    android:layout_below="@+id/welcomceMsgId"
+                    android:hint="User name"
+                    android:textStyle="italic" />
 
-            </LinearLayout>
+            <!--</LinearLayout>
 
-        </LinearLayout>
-        <LinearLayout
+        </LinearLayout>-->
+        <!--<LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -103,8 +97,8 @@
             android:paddingRight="20dp"
             android:paddingBottom="20dp"
             android:gravity="center">
-
-            <LinearLayout
+-->
+           <!-- <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -112,23 +106,11 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
-                android:paddingBottom="10dp">
+                android:paddingBottom="10dp">-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Password :"
-                    android:id="@+id/passwordLabelId"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
-                    android:textAlignment="center"
-                    android:textSize="20sp" />
-            </LinearLayout>
+    <!--</LinearLayout>-->
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -136,21 +118,24 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
-                android:paddingBottom="10dp">
+                android:paddingBottom="10dp">-->
 
                 <EditText
-                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/passwordValue"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
+                    android:paddingLeft="30dp"
+                    android:paddingTop="30dp"
+                    android:paddingRight="30dp"
+                    android:paddingBottom="30dp"
                     android:textAlignment="center"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:ems="10"/>
+                    android:ems="10"
+                    android:layout_below="@+id/userNameValue"
+                    android:textIsSelectable="false"
+                    android:textStyle="italic"
+                    android:hint="Password" />
 
                 <!--<EditText
                     android:layout_width="wrap_content"
@@ -158,11 +143,11 @@
                     android:inputType="textPassword"
                     android:ems="10"
                     android:id="@+id/editText" />-->
-            </LinearLayout>
+          <!--  </LinearLayout>
+-->
+       <!-- </LinearLayout>-->
 
-        </LinearLayout>
-
-        <LinearLayout
+       <!-- <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -171,7 +156,7 @@
             android:paddingLeft="20dp"
             android:paddingTop="20dp"
             android:paddingRight="20dp"
-            android:paddingBottom="20dp">
+            android:paddingBottom="20dp">-->
 
             <Button
                 android:layout_width="wrap_content"
@@ -179,15 +164,18 @@
                 android:text="Sign In"
                 android:id="@+id/signInBtnId"
                 android:gravity="center"
-                android:paddingLeft="40dp"
+                android:paddingLeft="20dp"
                 android:paddingTop="20dp"
-                android:paddingRight="40dp"
+                android:paddingRight="20dp"
                 android:paddingBottom="20dp"
                 android:textAlignment="center"
-                android:textSize="30dp" />
-        </LinearLayout>
+                android:textSize="30dp"
+                android:layout_below="@+id/passwordValue"
+                android:layout_alignLeft="@+id/passwordValue"
+                android:layout_alignRight="@+id/passwordValue" />
+       <!-- </LinearLayout>-->
 
-        <LinearLayout
+        <!--<LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -196,7 +184,7 @@
             android:paddingLeft="20dp"
             android:paddingTop="20dp"
             android:paddingRight="20dp"
-            android:paddingBottom="20dp">
+            android:paddingBottom="20dp">-->
 
             <Button
                 android:layout_width="wrap_content"
@@ -204,24 +192,16 @@
                 android:text="Sign Up"
                 android:id="@+id/signUpBtnId"
                 android:gravity="center"
-                android:paddingLeft="40dp"
+                android:paddingLeft="20dp"
                 android:paddingTop="20dp"
-                android:paddingRight="40dp"
+                android:paddingRight="20dp"
                 android:paddingBottom="20dp"
                 android:textAlignment="center"
-                android:textSize="30dp" />
-        </LinearLayout>
+                android:textSize="30dp"
+                android:layout_below="@+id/signInBtnId"
+                android:layout_alignLeft="@+id/passwordValue"
+                android:layout_alignRight="@+id/passwordValue" />
+        <!--</LinearLayout>-->
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/footerLayoutId"
-            android:paddingLeft="20dp"
-            android:paddingTop="20dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="20dp"
-            android:minHeight="10dp"
-            android:measureWithLargestChild="false"></LinearLayout>
-    </LinearLayout>
+    <!--</LinearLayout>-->
 </RelativeLayout>

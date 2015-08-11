@@ -10,24 +10,41 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.expense.database.ExpenseDatabase;
+import com.expense.model.User;
+
+import java.util.List;
+import java.util.Map;
 
 
 public class Expense extends Activity {
+
+    ExpenseDatabase db = new ExpenseDatabase();
 
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
          setContentView(R.layout.activity_expense);
-         final EditText userName = (EditText) findViewById(R.id.userNameValue);
-         EditText password = (EditText) findViewById(R.id.passwordValue);
+         final EditText userNameText = (EditText) findViewById(R.id.userNameValue);
+         final EditText passwordText = (EditText) findViewById(R.id.passwordValue);
          Button signInBtn = (Button) findViewById(R.id.signInBtnId);
          Button signUpBtn = (Button) findViewById(R.id.signUpBtnId);
 
          signInBtn.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 Intent homeScreen = new Intent(Expense.this, Home.class);
-                 startActivity(homeScreen);
+
+                String userName = userNameText.getText().toString();
+                 String password = passwordText.getText().toString();
+                 if(isValidUser(userName,password)){
+                     Intent homeScreen = new Intent(Expense.this, Home.class);
+                     homeScreen.putExtra("user", db.getUsers().get(userName));
+                     startActivity(homeScreen);
+                 }else{
+                     Toast.makeText(getApplicationContext(),"Invalid credentials",Toast.LENGTH_LONG).show();
+                 }
 
              }
          });
@@ -40,6 +57,22 @@ public class Expense extends Activity {
              }
          });
 
+    }
+
+    private boolean isValidUser(String userName, String password){
+        if(userName.isEmpty() || password.isEmpty()){
+            return false;
+        }
+
+        Map<String , User> usersMap = db.getUsers();
+        User user = usersMap.get(userName);
+        if(null == user){
+            return false;
+        }
+        if(!userName.equals(user.getName()) && !password.equals(user.getPassword())){
+            return false;
+        }
+            return true;
     }
 
     @Override
