@@ -18,7 +18,7 @@ public class DataBaseconfiguration {
     public DataSource dataSource() throws Exception {
         SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
         dataSource.setDriverClass(org.postgresql.Driver.class);
-        dataSource.setUrl("jdbc:postgresql://33.33.33.200:5432/sampleDb?user=ng7&password=ng7");
+        dataSource.setUrl("jdbc:postgresql://33.33.33.200:5432/sample?user=ng7&password=ng7");
         return dataSource;
     }
 

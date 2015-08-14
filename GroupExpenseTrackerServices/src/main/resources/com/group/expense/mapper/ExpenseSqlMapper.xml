@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.group.expense.mapper.ExpenseSqlMapper">
+
+  <insert id="addExpense" parameterType="com.group.expense.model.Expense">
+    INSERT INTO EXPENSE (userid, groupid , itemid , expenseamount , createddate) VALUES 
+    (#{expense.user.userId} , #{expense.group.groupId} , #{expense.item.itemId} , #{expense.expenseAmount} , CURRENT_TIMESTAMP);
+  </insert>
+  
+  <select id="getAllExpenses" resultType="com.group.expense.model.Expense">
+    SELECT username "user.userName" , firstname "user.firstName" , lastname "user.lastName" , itemname "item.itemName" , expenseamount "expenseAmount", e.createddate "createdDate"  from 
+    expense e 
+    left join users u on e.userid = u.user_id
+    left join item i on e.itemid = i.itemid
+    where e.groupid = (select groupid from groups where groupname = #{groupName});   
+  </select>
+
+</mapper>

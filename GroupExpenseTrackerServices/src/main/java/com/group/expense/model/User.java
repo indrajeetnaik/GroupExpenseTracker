@@ -3,11 +3,17 @@
  */
 package com.group.expense.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 /**
  * @author AKivanda
  *
  */
+@JsonInclude(Include.NON_NULL)
 public class User {
+
+    private Integer userId;
 
     private String userName;
 
@@ -22,6 +28,38 @@ public class User {
     private String phoneNumber;
 
     private String emailId;
+
+    private Group group;
+
+    private Integer isAdmin;
+
+    /**
+     * @return the userId
+     */
+    public Integer getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * @return the group
+     */
+    public Group getGroup() {
+        return group;
+    }
+
+    /**
+     * @param group the group to set
+     */
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 
     /**
      * @return the userName
@@ -119,6 +157,20 @@ public class User {
      */
     public void setEmailId(String emailId) {
         this.emailId = emailId;
+    }
+
+    /**
+     * @return the isAdmin
+     */
+    public Integer getIsAdmin() {
+        return isAdmin;
+    }
+
+    /**
+     * @param isAdmin the isAdmin to set
+     */
+    public void setIsAdmin(Integer isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
 }

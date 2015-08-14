@@ -3,12 +3,17 @@
 <mapper namespace="com.group.expense.mapper.UserSqlMapper">
 
   <insert id="addUser" parameterType="com.group.expense.model.User">
-    INSERT INTO USERS (username , password ,firstname , lastname , phonenumber, email)
-    VALUES (#{user.userName} ,#{user.password}, #{user.firstName} , #{user.lastName} , #{user.phoneNumber}, #{user.emailId});
+    INSERT INTO USERS (username , password ,firstname , lastname , phonenumber, emailid , createddate)
+    VALUES (#{user.userName} ,#{user.password}, #{user.firstName} , #{user.lastName} , #{user.phoneNumber}, #{user.emailId},CURRENT_TIMESTAMP);
   </insert>
   
   <select id="getAllUsers" resultType="com.group.expense.model.User">
-      SELECT userName "userName", firstName "firstName", lastName "lastName", email "emailId" , phoneNumber FROM users; 
+      select user_id "üserId" , userName "userName", firstname "firstName" , lastname "lastName" , emailid "emailId" , phonenumber "phoneNumber" from users where user_id in 
+      ( select userid from groupusers gu left join groups g on g.groupid = gu.groupid and groupname = #{groupName}) ;
+  </select>
+  
+  <select id="getUserByUserName" resultType="com.group.expense.model.User">
+      select user_id "userId", userName "userName" , password "password" , emailid "emailId" , phonenumber "phoneNumber" from users where username = #{userName}; 
   </select>
 
 </mapper>
