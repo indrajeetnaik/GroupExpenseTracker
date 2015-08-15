@@ -9,23 +9,24 @@
    <!-- <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />-->
 
-    <LinearLayout
-        android:orientation="vertical"
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/userMessageId"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="20dp"
+        android:textSize="10sp"
+        android:textStyle="italic"
+        android:textColor="#00ffffff"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:textAlignment="viewEnd"
+        android:gravity="end" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/appNameLayoutId"
-            android:paddingLeft="20dp"
-            android:paddingTop="20dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="20dp">
-
-            <TextView
+    <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Group Expense Tracker"
@@ -36,21 +37,27 @@
                 android:paddingRight="20dp"
                 android:paddingBottom="20dp"
                 android:textAlignment="center"
-                android:textSize="25sp" />
-        </LinearLayout>
+                android:textSize="25sp"
+        android:layout_below="@+id/userMessageId" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/viewGroupsLayoutId"
-            android:paddingLeft="20dp"
-            android:paddingTop="20dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="20dp">
 
-            <Button
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Group"
+        android:id="@+id/createGroupBtnId"
+        android:gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="20dp"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:layout_below="@+id/appNameId"
+        android:layout_alignRight="@+id/appNameId"
+        android:layout_alignLeft="@+id/appNameId" />
+
+    <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="View Groups"
@@ -61,31 +68,10 @@
                 android:paddingRight="20dp"
                 android:paddingBottom="20dp"
                 android:textAlignment="center"
-                android:textSize="25sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/createGroupsLayoutId"
-            android:paddingLeft="20dp"
-            android:paddingTop="20dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="20dp">
+                android:textSize="25sp"
+                android:layout_below="@+id/createGroupBtnId"
+        android:layout_alignLeft="@+id/createGroupBtnId"
+        android:layout_alignRight="@+id/createGroupBtnId" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Create Group"
-                android:id="@+id/createGroupBtnId"
-                android:gravity="center"
-                android:paddingLeft="20dp"
-                android:paddingTop="20dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="20dp"
-                android:textAlignment="center"
-                android:textSize="25sp" />
-        </LinearLayout>
-    </LinearLayout>
+
 </RelativeLayout>
