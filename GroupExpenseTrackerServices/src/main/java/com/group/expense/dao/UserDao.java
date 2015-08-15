@@ -25,7 +25,16 @@ public class UserDao {
         return userSqlMapper.addUser(user);
     }
 
-    public List<User> getAllUsers() {
-        return userSqlMapper.getAllUsers();
+    public List<User> getAllUsers(String groupName) {
+        return userSqlMapper.getAllUsers(groupName);
     }
+
+    public int deleteUser(User user) {
+        return userSqlMapper.deleteUser(user);
+    }
+
+    public User getUserByUserName(String userName) {
+        return userSqlMapper.getUserByUserName(userName);
+    }
+
 }

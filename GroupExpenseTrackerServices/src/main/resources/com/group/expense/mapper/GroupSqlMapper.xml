@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.group.expense.mapper.GroupSqlMapper">
+
+  <select id="getAllGroupsOfUser" resultType="com.group.expense.model.Group">
+      select groupname "groupName" 
+      from groups g 
+      left join groupusers gu on gu.groupid = g.groupid
+      where gu.userid = (select user_id from users where username =#{userName})
+  </select>
+  
+  <insert id="createGroup" parameterType="com.group.expense.model.Group">
+    INSERT INTO groups (groupname , createddate ) values (#{group.groupName},CURRENT_TIMESTAMP);     
+  </insert>
+  
+ <insert id="addUserToGroup" parameterType="com.group.expense.model.User">
+  INSERT INTO groupusers (groupId, userId , isadmin ) values (#{groupId} , #{user.userId} , #{isAdmin}  );
+ </insert>
+ 
+ <select id="getGroupByGroupName" resultType="com.group.expense.model.Group">
+    SELECT groupid "groupId" , groupName "groupName" FROM groups where groupname = #{groupName};
+ </select>
+</mapper>

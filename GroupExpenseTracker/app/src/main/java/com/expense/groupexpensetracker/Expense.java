@@ -3,6 +3,8 @@ package com.expense.groupexpensetracker;
 import android.app.Activity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,10 +25,20 @@ public class Expense extends Activity {
 
     ExpenseDatabase db = new ExpenseDatabase();
 
-     @Override
+
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         setContentView(R.layout.activity_expense);
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            setContentView(R.layout.activity_expense);
+        }else{
+            setContentView(R.layout.activity_expense_landscape);
+        }
+
+
          final EditText userNameText = (EditText) findViewById(R.id.userNameValue);
          final EditText passwordText = (EditText) findViewById(R.id.passwordValue);
          Button signInBtn = (Button) findViewById(R.id.signInBtnId);
@@ -57,6 +69,16 @@ public class Expense extends Activity {
              }
          });
 
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+
+        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
+//window
+        }else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+
+        }
     }
 
     private boolean isValidUser(String userName, String password){

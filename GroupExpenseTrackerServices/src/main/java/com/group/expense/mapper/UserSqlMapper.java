@@ -19,6 +19,10 @@ public interface UserSqlMapper {
 
     public int addUser(@Param("user") User user);
 
-    public List<User> getAllUsers();
+    public List<User> getAllUsers(@Param("groupName") String groupName);
+
+    public int deleteUser(@Param("user") User user);
+
+    public User getUserByUserName(@Param("userName") String userName);
 
 }
