@@ -6,11 +6,14 @@ package com.group.expense.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * @author AKivanda
  *
  */
 @JsonInclude(Include.NON_NULL)
+@XmlRootElement
 public class User {
 
     private Integer userId;

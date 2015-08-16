@@ -3,7 +3,7 @@
 <mapper namespace="com.group.expense.mapper.GroupSqlMapper">
 
   <select id="getAllGroupsOfUser" resultType="com.group.expense.model.Group">
-      select groupname "groupName" 
+      select g.groupname "groupName" , g.groupId "groupId"
       from groups g 
       left join groupusers gu on gu.groupid = g.groupid
       where gu.userid = (select user_id from users where username =#{userName})

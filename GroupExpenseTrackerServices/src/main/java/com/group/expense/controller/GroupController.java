@@ -2,6 +2,7 @@ package com.group.expense.controller;
 
 import com.group.expense.dao.GroupDao;
 import com.group.expense.dao.UserDao;
+import com.group.expense.model.ErrorMessage;
 import com.group.expense.model.Group;
 import com.group.expense.model.User;
 
@@ -19,6 +20,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 @Component
 @Path("/group/")
@@ -40,15 +42,18 @@ public class GroupController {
     @POST
     @Path("creategroup")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response createGroup(Group group) {
         Group dbGroup = groupDao.getGroupByGroupName(group.getGroupName());
+
         if (dbGroup != null) {
-            return Response.status(Response.Status.CONFLICT).entity("Group name already exists").build();
+            ErrorMessage errorMessage = new ErrorMessage("GroupName already exists", 500, "Error");
+            return Response.status(Status.INTERNAL_SERVER_ERROR).entity(errorMessage).build();
         }
         else {
             groupDao.createGroup(group);
         }
-        return Response.status(200).entity(true).build();
+        return Response.status(200).entity(group).build();
     }
 
     @POST

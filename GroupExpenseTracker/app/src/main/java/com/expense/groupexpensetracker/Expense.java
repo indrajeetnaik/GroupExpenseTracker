@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 
 import com.expense.database.ExpenseDatabase;
 import com.expense.model.User;
+import com.expense.service.UserService;
+import com.expense.util.UserSessionManager;
 
 import java.util.List;
 import java.util.Map;
@@ -23,10 +26,9 @@ import java.util.Map;
 
 public class Expense extends Activity {
 
-    ExpenseDatabase db = new ExpenseDatabase();
+    private UserService userService;
 
-
-
+    UserSessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,10 @@ public class Expense extends Activity {
         }else{
             setContentView(R.layout.activity_expense_landscape);
         }
-
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
          final EditText userNameText = (EditText) findViewById(R.id.userNameValue);
          final EditText passwordText = (EditText) findViewById(R.id.passwordValue);
@@ -47,17 +52,17 @@ public class Expense extends Activity {
          signInBtn.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-
-                String userName = userNameText.getText().toString();
-                 String password = passwordText.getText().toString();
-                 if(isValidUser(userName,password)){
+                User user = new User();
+                 user.setUserName(userNameText.getText().toString());
+                 user.setPassword( passwordText.getText().toString());
+                 if(isValidUser(user)){
+                    session = new UserSessionManager(getApplicationContext());
+                    session.createUserLoginSession(user.getUserName(),user.getUserId());
                      Intent homeScreen = new Intent(Expense.this, Home.class);
-                     homeScreen.putExtra("user", db.getUsers().get(userName));
                      startActivity(homeScreen);
                  }else{
                      Toast.makeText(getApplicationContext(),"Invalid credentials",Toast.LENGTH_LONG).show();
                  }
-
              }
          });
          signUpBtn.setOnClickListener(new View.OnClickListener() {
@@ -65,10 +70,8 @@ public class Expense extends Activity {
              public void onClick(View v) {
                  Intent homeScreen = new Intent(Expense.this, Registration.class);
                  startActivity(homeScreen);
-
              }
          });
-
     }
 
     @Override
@@ -81,20 +84,15 @@ public class Expense extends Activity {
         }
     }
 
-    private boolean isValidUser(String userName, String password){
-        if(userName.isEmpty() || password.isEmpty()){
+    private boolean isValidUser(User user){
+        if(user.getUserName().isEmpty() || user.getPassword().isEmpty()) {
             return false;
         }
-
-        Map<String , User> usersMap = db.getUsers();
-        User user = usersMap.get(userName);
-        if(null == user){
+         User existingUser = UserService.validateUser(user);
+        if(null == existingUser){
             return false;
         }
-        if(!userName.equals(user.getName()) && !password.equals(user.getPassword())){
-            return false;
-        }
-            return true;
+        return true;
     }
 
     @Override
