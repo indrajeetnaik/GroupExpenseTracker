@@ -8,11 +8,14 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * @author AKivanda
  *
  */
 @JsonInclude(Include.NON_NULL)
+@XmlRootElement
 public class Group {
 
     private Integer groupId;

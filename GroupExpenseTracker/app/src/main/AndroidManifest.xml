@@ -37,5 +37,6 @@
             android:label="@string/title_activity_add_member" >
         </activity>
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

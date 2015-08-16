@@ -4,6 +4,7 @@
 package com.group.expense.controller;
 
 import com.group.expense.dao.UserDao;
+import com.group.expense.model.ErrorMessage;
 import com.group.expense.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 /**
  * @author AKivanda
@@ -49,19 +51,21 @@ public class SignUpController {
     @POST
     @Path("signin")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response signIn(User user) {
         User existingUser = userDao.getUserByUserName(user.getUserName());
         if (existingUser != null) {
             if (user.getPassword().equals(existingUser.getPassword())) {
-                return Response.status(200).entity(true).build();
+                return Response.status(200).entity(existingUser).build();
             }
             else {
-                return Response.status(Response.Status.UNAUTHORIZED).entity("Username or password does not match")
-                        .build();
+                ErrorMessage errorMessage = new ErrorMessage("Username or password does not match", 401, "Error");
+                return Response.status(Status.UNAUTHORIZED).entity(errorMessage).build();
             }
         }
         else {
-            return Response.status(Response.Status.UNAUTHORIZED).entity("Username or password does not match").build();
+            ErrorMessage errorMessage = new ErrorMessage("Username or password does not match", 401, "Error");
+            return Response.status(Status.UNAUTHORIZED).entity(errorMessage).build();
         }
     }
 

@@ -52,7 +52,7 @@ public class Registration extends AppCompatActivity {
 
                 if(isValidateRegistrationForm(name, email, password, confirmPassword, mobileNum)){
                     User user = new User();
-                    user.setName(name);
+                    user.setUserName(name);
                     user.setEmailAddress(email);
                     user.setIsAdmin(true);
                     user.setMobileNum(mobileNum);
