@@ -13,6 +13,15 @@ public class Group implements Serializable{
     private String groupDesc;
     private List<User> members = new ArrayList<>();
 
+    public Group() {
+    }
+
+    public Group(long groupId, String groupName, String groupDesc) {
+        this.groupId = groupId;
+        this.groupName = groupName;
+        this.groupDesc = groupDesc;
+    }
+
     public long getGroupId() {
         return groupId;
     }
@@ -43,5 +52,10 @@ public class Group implements Serializable{
 
     public void setMembers(List<User> members) {
         this.members = members;
+    }
+
+    @Override
+    public String toString() {
+        return this.groupName;
     }
 }
