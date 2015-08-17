@@ -37,15 +37,17 @@ public class SignUpController {
     @POST
     @Path("signupuser")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response signUpUser(User user) {
         User existingUser = userDao.getUserByUserName(user.getUserName());
         if (existingUser != null) {
-            return Response.status(Response.Status.CONFLICT).entity("User with this username already exists").build();
+            ErrorMessage errorMessage = new ErrorMessage("User with this username already exists", 409, "Error");
+            return Response.status(Response.Status.CONFLICT).entity(errorMessage).build();
         }
         else {
             userDao.addUser(user);
         }
-        return Response.status(200).entity(true).build();
+        return Response.status(200).entity(user).build();
     }
 
     @POST

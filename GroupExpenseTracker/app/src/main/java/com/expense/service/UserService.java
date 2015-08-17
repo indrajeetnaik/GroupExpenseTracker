@@ -48,4 +48,34 @@ public class UserService {
         }
         return  user;
     }
+
+    public static User signUpUser(User user){
+        HttpClient client = new DefaultHttpClient();
+        HttpPost request = ServiceUtil.createHttpPost("http://10.0.2.2:8080/user/signupuser");
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("userName",user.getUserName());
+            jsonObject.put("password", user.getPassword());
+            jsonObject.put("firstName" , user.getFirstName());
+            jsonObject.put("lastName",user.getLastName());
+            jsonObject.put("emailId",user.getEmailAddress());
+            jsonObject.put("phoneNumber",user.getMobileNum());
+            request.setEntity(new StringEntity(jsonObject.toString()));
+            HttpResponse response = client.execute(request);
+            String jsonResponse = null;
+            if ( response.getStatusLine().getStatusCode() ==200 && response.getEntity() != null) {
+                InputStream instream =  response.getEntity().getContent();
+                jsonResponse = ServiceUtil.convertStreamToString(instream);
+                jsonObject = new JSONObject(jsonResponse);
+                user.setUserId(jsonObject.getInt("userId"));
+                // Closing the input stream will trigger connection release
+                instream.close();
+            }else{
+                return  null;
+            }
+        }catch(Exception e){
+            return null;
+        }
+        return  user;
+    }
 }
