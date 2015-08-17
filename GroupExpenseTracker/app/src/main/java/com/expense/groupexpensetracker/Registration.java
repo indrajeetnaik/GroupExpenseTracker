@@ -1,6 +1,7 @@
 package com.expense.groupexpensetracker;
 
 import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,14 +13,14 @@ import android.widget.Toast;
 
 import com.expense.database.ExpenseDatabase;
 import com.expense.model.User;
+import com.expense.service.UserService;
+import com.expense.util.UserSessionManager;
 
 import java.util.ArrayList;
 
 public class Registration extends AppCompatActivity {
 
-
-    private ExpenseDatabase database = new ExpenseDatabase();
-
+    UserSessionManager session;
     private EditText nameText;
     private EditText passwordText;
     private EditText emailText;
@@ -30,14 +31,16 @@ public class Registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
         nameText = (EditText) findViewById(R.id.etName);
         passwordText = (EditText) findViewById(R.id.etPassword);
         emailText = (EditText) findViewById(R.id.etEmail);
         confirmPasswordText = (EditText) findViewById(R.id.etConfirmPassword);
         mobileNumText = (EditText) findViewById(R.id.etMobileNum);
-
-
 
         Button regSubBtn = (Button) findViewById(R.id.regFormSubBtn);
 
@@ -54,13 +57,20 @@ public class Registration extends AppCompatActivity {
                     User user = new User();
                     user.setUserName(name);
                     user.setEmailAddress(email);
-                    user.setIsAdmin(true);
+                    //user.setIsAdmin(true);
                     user.setMobileNum(mobileNum);
                     user.setPassword(password);
-                    database.getUsers().put(name, user);
-                    Intent intent = new Intent(Registration.this, Home.class);
-                    intent.putExtra("user", user);
-                    startActivity(intent);
+                    user.setFirstName("Avinash");
+                    user.setLastName("Kivanda");
+                    User newUser = UserService.signUpUser(user);
+                    if(newUser!=null){
+                        session = new UserSessionManager(getApplicationContext());
+                        session.createUserLoginSession(newUser.getUserName(),newUser.getUserId());
+                        Intent intent = new Intent(Registration.this, Home.class);
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(getApplicationContext(),"User can not be signed up", Toast.LENGTH_SHORT);
+                    }
                 }
             }
         });

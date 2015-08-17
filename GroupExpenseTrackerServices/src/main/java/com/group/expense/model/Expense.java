@@ -5,10 +5,13 @@ package com.group.expense.model;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * @author AKivanda
  *
  */
+@XmlRootElement
 public class Expense {
 
     private User user;

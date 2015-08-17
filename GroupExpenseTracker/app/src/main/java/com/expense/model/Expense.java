@@ -11,6 +11,8 @@ public class Expense {
     private Group group;
     private String description;
     private Date purchasedOn;
+    private User user;
+
     public long getId() {
         return id;
     }
@@ -41,5 +43,13 @@ public class Expense {
 
     public void setPurchasedOn(Date purchasedOn) {
         this.purchasedOn = purchasedOn;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
